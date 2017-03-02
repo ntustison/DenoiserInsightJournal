@@ -50,8 +50,8 @@ SET(CurrentExe "ImageCopy")
 ADD_EXECUTABLE(${CurrentExe} ImageCopy.cxx)
 TARGET_LINK_LIBRARIES(${CurrentExe} ${Libraries})
 
-SET(CurrentExe "DenoiseImage”)
-SET(SOURCES "${CMAKE_SOURCE_DIR}/antsCommandLineParser" "${CMAKE_SOURCE_DIR}/antsCommandLineOption" "${CMAKE_SOURCE_DIR}/antsCommandLineOption" )
+SET(CurrentExe "DenoiseImage")
+SET(SOURCES "${CMAKE_SOURCE_DIR}/antsCommandLineParser" "${CMAKE_SOURCE_DIR}/antsCommandLineOption" "${CMAKE_SOURCE_DIR}/antsCommandLineOption")
 ADD_EXECUTABLE(${CurrentExe} DenoiseImage.cxx ${SOURCES} )
 TARGET_LINK_LIBRARIES(${CurrentExe} ${Libraries})
 
@@ -63,5 +63,8 @@ TARGET_LINK_LIBRARIES(${CurrentExe} ${Libraries})
 #any tests you can comment out or delete the following line.
 ADD_TEST(CreateImage ImageCopy ${CMAKE_SOURCE_DIR}/img1.png)
 ADD_TEST(CompareImage ImageCompare ${CMAKE_SOURCE_DIR}/img1.png ${CMAKE_SOURCE_DIR}/img1.png.base.png)
+
+ADD_TEST( DenoiseT81 DenoiseImage -d 2 -i ${CMAKE_SOURCE_DIR}/input/t81slice.nii.gz -x ${CMAKE_SOURCE_DIR}/input/t81mask.nii.gz -o ${CMAKE_SOURCE_DIR}/input/t81testCorrected.nii.gz -v 1)
+ADD_TEST( DenoiseHe3 DenoiseImage -d 3 -i ${CMAKE_SOURCE_DIR}/input/he3volume.nii.gz -x ${CMAKE_SOURCE_DIR}/input/he3mask.nii.gz -o ${CMAKE_SOURCE_DIR}/input/he3testCorrected.nii.gz -v 1)
 
 #Once you're done modifying this template, you should rename it to "CMakeLists.txt"
